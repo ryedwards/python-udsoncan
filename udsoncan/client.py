@@ -2254,6 +2254,8 @@ class Client:
                         using_p2_star = True
                         self.logger.debug("Server requested to wait with response code %s (0x%02x), single request timeout is now set to P2* (%.3f seconds)" %
                                           (response.code_name, response.code, single_request_timeout))
+                    if self.config['response_pending_cb'] is not None:
+                        self.config['response_pending_cb']()
                 else:
                     raise NegativeResponseException(response)
 
